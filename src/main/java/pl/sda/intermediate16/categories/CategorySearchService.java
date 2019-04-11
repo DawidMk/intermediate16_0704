@@ -2,6 +2,7 @@ package pl.sda.intermediate16.categories;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CategorySearchService {
 
@@ -32,12 +33,14 @@ public class CategorySearchService {
                 openParent(categoryDTO.getParentCat());
             }
         }
+        categoryDTOList = categoryDTOList.stream().filter(c -> c.getCategoryState().isOpen())
+                .collect(Collectors.toList());
 
         return categoryDTOList;
     }
 
     private void openParent(CategoryDTO categoryDTO) { //otwieramy wszystkie nadrzędne kategorie
-        categoryDTO.getCategoryState().setOpen(true);
+        categoryDTO.getCategoryState().setOpen(false);
         if (categoryDTO.getParentId() == null) {
             return;
         }

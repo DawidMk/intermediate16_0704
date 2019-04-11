@@ -25,7 +25,12 @@ public class CollectionComparisonUtilTest {
     void compareSimpleCollections() { //zakładamy, że wartości w stringu są tym samym co liczbowe -> "1" == 1
         List<String> list = Lists.newArrayList("1", "2", "3");
         Set<Integer> set = Sets.newHashSet(1, 2, 3);
-        CollectionComparisonComparator<String, Integer> stringAndNumberEqualityComparator = null; //todo nalezy okreslic w jaki sposob porownywac napisy i liczby
+        CollectionComparisonComparator<String, Integer> stringAndNumberEqualityComparator = new CollectionComparisonComparator<String, Integer>() {
+            @Override
+            public boolean isEqual(String elementA, Integer elementB) {
+                return Integer.valueOf(elementA) == elementB;
+            }
+        };
         CollectionComparisonResult<String, Integer> result = CollectionComparisonUtil.compareCollections(list, set, stringAndNumberEqualityComparator);
 
         Assertions.assertTrue(result.isSame());

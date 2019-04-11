@@ -13,6 +13,8 @@ public class CollectionComparisonResult<A,B> {
     private LinkedHashSet<B> onlyInSecond = new LinkedHashSet<>();
     private Map<A,B> common = new LinkedHashMap<>();
 
+
+
     public boolean isSame() {
         throw new NotImplementedException("Do dzieła!"); //todo
     }
